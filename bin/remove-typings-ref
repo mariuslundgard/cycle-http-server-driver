@@ -1,0 +1,11 @@
+#!/usr/bin/env node
+
+console.log('Remove typings references...')
+
+const fs = require('fs')
+
+const tsFile = `${process.cwd()}/${process.argv[2]}`
+const buf = fs.readFileSync(tsFile)
+const replacedData = buf.toString().replace('/// <reference path="../typings/main.d.ts" />\n', '')
+fs.writeFileSync(tsFile, replacedData)
+console.log('Remove typings references: OK')
