@@ -2,24 +2,24 @@
 
 import * as test from 'tape'
 
-import {makeHTTPContextDriver} from '../src/http-context-driver'
+import {makeHTTPContextDriver} from '../src/http-server-driver'
 
 import {
   MockHTTPContext,
-  makeMockLogger,
-  makeMockResponse,
-  makeMockTransport,
+  makeMockHTTPLogger,
+  makeMockHTTPResponse,
+  makeMockHTTPTransport,
   makeHoldSubject
 } from './helpers'
 
 test('should respond', (t) => {
   t.plan(6)
 
-  const logger = makeMockLogger()
-  const transport = makeMockTransport(logger)
+  const logger = makeMockHTTPLogger()
+  const transport = makeMockHTTPTransport(logger)
   const driver = makeHTTPContextDriver(8080, logger, transport)
   const request = {headers: {}, method: 'PUT', url: '/'}
-  const response = makeMockResponse()
+  const response = makeMockHTTPResponse()
   const outgoing = makeHoldSubject()
   const incoming$ = driver(outgoing.stream)
 

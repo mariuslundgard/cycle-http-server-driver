@@ -1,5 +1,5 @@
 {
-  "name": "cycle-http-context-driver",
+  "name": "cycle-http-server-driver",
   "version": false,
   "dependencies": {
   },

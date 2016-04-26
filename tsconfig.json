@@ -17,10 +17,9 @@
     "convertTabsToSpaces": true
   },
   "files": [
-    "./src/http-context-driver.ts",
-    "./src/transport/http.ts",
+    "./src/http-server-driver.ts",
     "./test/helpers.ts",
-    "./test/http-context-driver.test.ts"
+    "./test/http-server-driver.test.ts"
   ],
   "filesGlob": [
     "./src/**/*.ts",

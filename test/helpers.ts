@@ -4,31 +4,31 @@ import {
 } from '@reactivex/rxjs'
 
 import {
-  Server,
-  Logger,
-  Request,
-  Response,
-  Transport,
+  HTTPServer,
+  HTTPLogger,
+  HTTPRequest,
+  HTTPResponse,
+  HTTPTransport,
   HTTPContext
-} from '../src/http-context-driver'
+} from '../src/http-server-driver'
 
-export interface MockTransport extends Transport {
-  handleRequest(req: Request, res: MockResponse): void
+export interface MockHTTPTransport extends HTTPTransport {
+  handleRequest(req: HTTPRequest, res: MockHTTPResponse): void
 }
 
-export interface MockResponse extends Response {
+export interface MockHTTPResponse extends HTTPResponse {
   body: string
   status: number
   headers: Object
 }
 
 export interface MockHTTPContext extends HTTPContext {
-  request: Request
-  response: MockResponse
+  request: HTTPRequest
+  response: MockHTTPResponse
 }
 
-export function makeMockLogger (): Logger {
-  const logger: Logger = {
+export function makeMockHTTPLogger (): HTTPLogger {
+  const logger: HTTPLogger = {
     info (...args) {
       console.log('LOG', ...args)
     }
@@ -37,8 +37,8 @@ export function makeMockLogger (): Logger {
   return logger
 }
 
-export function makeMockServer (logger: Logger): Server {
-  const server: Server = {
+export function makeMockHTTPServer (logger: HTTPLogger): HTTPServer {
+  const server: HTTPServer = {
     listen (port: number) {
     },
 
@@ -50,7 +50,7 @@ export function makeMockServer (logger: Logger): Server {
   return server
 }
 
-export function makeMockResponse (): MockResponse {
+export function makeMockHTTPResponse (): MockHTTPResponse {
   return {
     body: '',
     status: 200,
@@ -67,12 +67,12 @@ export function makeMockResponse (): MockResponse {
   }
 }
 
-export function makeMockTransport (logger: Logger): MockTransport {
-  const server = makeMockServer(logger)
+export function makeMockHTTPTransport (logger: HTTPLogger): MockHTTPTransport {
+  const server = makeMockHTTPServer(logger)
 
   let cb: Function
 
-  const transport: MockTransport = {
+  const transport: MockHTTPTransport = {
     createServer (_cb) {
       cb = _cb
 
@@ -91,7 +91,6 @@ export function makeHoldSubject () {
   const stream = new ReplaySubject(1)
   const observer: Observer<HTTPContext> = {
     next: (value: HTTPContext) => {
-      console.log('NEXT', value)
       stream.next(value)
     },
     error: (error: Error) => {

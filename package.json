@@ -1,9 +1,9 @@
 {
-  "name": "cycle-http-context-driver",
+  "name": "cycle-http-server-driver",
   "version": "0.0.1-alpha.4",
-  "description": "A HTTP server driver for CycleJS for managing request/response in Node.js.",
-  "main": "lib/src/http-context-driver.js",
-  "typings": "lib/src/http-context-driver.d.ts",
+  "description": "An HTTP server driver for CycleJS for managing request/response in Node.js.",
+  "main": "lib/src/http-server-driver.js",
+  "typings": "lib/src/http-server-driver.d.ts",
   "directories": {
     "test": "test"
   },
@@ -12,10 +12,10 @@
   ],
   "scripts": {
     "prepublish": "typings install && npm run build",
-    "test": "node lib/test/http-context-driver.test",
+    "test": "node lib/test/http-server-driver.test",
     "prebuild": "rimraf lib && mkdirp lib",
     "build": "tsc",
-    "postbuild": "bin/remove-typings-ref lib/src/http-context-driver.d.ts",
+    "postbuild": "bin/remove-typings-ref lib/src/http-server-driver.d.ts",
     "lint": "tslint -c tslint.json src/*.ts"
   },
   "author": "Marius Lundgård <studio@mariuslundgard.com> (http://mariuslundgard.com/)",
@@ -32,12 +32,15 @@
     "typescript": "^1.8.10",
     "typings": "^0.8.1"
   },
+  "peerDependencies": {
+    "@cycle/core": "^7.0.0-rc4"
+  },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mariuslundgard/cycle-http-context-driver.git"
+    "url": "git+https://github.com/mariuslundgard/cycle-http-server-driver.git"
   },
   "bugs": {
-    "url": "https://github.com/mariuslundgard/cycle-http-context-driver/issues"
+    "url": "https://github.com/mariuslundgard/cycle-http-server-driver/issues"
   },
-  "homepage": "https://github.com/mariuslundgard/cycle-http-context-driver#readme"
+  "homepage": "https://github.com/mariuslundgard/cycle-http-server-driver#readme"
 }

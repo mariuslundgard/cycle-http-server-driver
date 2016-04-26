@@ -1,13 +1,13 @@
-# cycle-http-context-driver
+# cycle-http-server-driver
 
 *In alpha.*
 
-A HTTP server driver for CycleJS for managing request/response in Node.js.
+An HTTP server driver for CycleJS for managing request/response in Node.js.
 
 ## Installation
 
 ```sh
-npm install cycle-http-context-driver --save
+npm install cycle-http-server-driver --save
 ```
 
 ## Documentation
@@ -15,23 +15,25 @@ npm install cycle-http-context-driver --save
 ### Usage
 
 ```js
+import transport from 'http'
+
 import {
-  makeHTTPTransport,
-  makeHTTPContextDriver
-} from 'cycle-http-context-driver'
+  makeHTTPServerDriver
+} from 'cycle-http-server-driver'
 
 import bunyan from 'bunyan'
 
+const port = 8080
 const logger = bunyan.createLogger({name: 'web'})
-const transport = makeHTTPTransport()
+const transport = makeHTTPServerTransport()
 
 const drivers = {
-  HTTPContext: makeHTTPContextDriver(port, logger, transport)
+  HTTPServer: makeHTTPServerDriver(port, logger, transport)
 }
 
 function main (sources) {
   return {
-    HTTPContext: sources.HTTP.map((context) => {
+    HTTPServer: sources.HTTPServer.map((context) => {
       return {
         ...context,
         headers: {'Content-Type': 'text/html'},
