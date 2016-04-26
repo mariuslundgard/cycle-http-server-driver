@@ -8,7 +8,7 @@
     "suppressImplicitAnyIndexErrors": true,
     "module": "commonjs",
     "target": "ES5",
-    "outDir": "build/",
+    "outDir": "lib/",
     "noLib": false
   },
   "formatCodeOptions": {
@@ -17,10 +17,14 @@
     "convertTabsToSpaces": true
   },
   "files": [
-    "./src/http-context-driver.ts"
+    "./src/http-context-driver.ts",
+    "./src/transport/http.ts",
+    "./test/helpers.ts",
+    "./test/http-context-driver.test.ts"
   ],
   "filesGlob": [
     "./src/**/*.ts",
+    "./test/**/*.ts",
     "!./typings/**/*.ts"
   ],
   "exclude": [
