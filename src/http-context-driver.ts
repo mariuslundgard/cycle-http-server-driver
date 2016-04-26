@@ -1,24 +1,43 @@
 /// <reference path="../typings/main.d.ts" />
 
-import * as http from 'http'
 import {Observer, Observable} from '@reactivex/rxjs'
 
 export interface Logger {
   info (...args: any[]): void
 }
 
-export interface HTTPContext {
-  request: http.IncomingMessage
-  response: http.ServerResponse
-  status?: number
-  headers?: Object
-  body?: String
+export interface Server {
+  listen(port: number): void
+  close(): void
 }
 
-function createHTTPContext$<Observable> (port: number, logger: Logger) {
+export interface Transport {
+  createServer (...args: any[]): Server
+}
+
+export interface Request {
+  headers: Object
+  method: string
+  url: string
+}
+
+export interface Response {
+  end(body: string): void
+  writeHead(status: number, headers: Object): void
+}
+
+export interface HTTPContext {
+  request: Request
+  response: Response
+  status?: number
+  headers?: Object
+  body?: string
+}
+
+export function createHTTPContext$<Observable> (port: number, logger: Logger, transport: Transport) {
   const httpContext$ = Observable.create((observer: Observer<HTTPContext>) => {
-    const server = http.createServer(
-      (request: http.IncomingMessage, response: http.ServerResponse) => {
+    const server = transport.createServer(
+      (request: Request, response: Response) => {
         logger.info(`${request.method} ${request.url}`)
 
         const incoming: HTTPContext = {
@@ -40,9 +59,9 @@ function createHTTPContext$<Observable> (port: number, logger: Logger) {
   return httpContext$
 }
 
-export function makeHTTPContextDriver<DriverFunction> (port: number, logger: Logger) {
+export function makeHTTPContextDriver<DriverFunction> (port: number, logger: Logger, transport: Transport) {
   return function HTTPContextDriver<Observable> (outgoing$: any) {
-    const incoming$ = createHTTPContext$(port, logger)
+    const incoming$ = createHTTPContext$(port, logger, transport)
 
     outgoing$.subscribe((outgoing: HTTPContext) => {
       outgoing.response.writeHead(outgoing.status || 200, outgoing.headers || {})

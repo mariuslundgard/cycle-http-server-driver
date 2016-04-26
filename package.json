@@ -2,17 +2,20 @@
   "name": "cycle-http-context-driver",
   "version": "0.0.1-alpha.3",
   "description": "A HTTP server driver for CycleJS for managing request/response in Node.js.",
-  "main": "build/http-context-driver.js",
-  "typings": "build/http-context-driver.d.ts",
+  "main": "lib/src/http-context-driver.js",
+  "typings": "lib/src/http-context-driver.d.ts",
+  "directories": {
+    "test": "test"
+  },
   "files": [
-    "build"
+    "lib"
   ],
   "scripts": {
     "prepublish": "typings install && npm run build",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "prebuild": "rimraf build && mkdirp build",
-    "postbuild": "bin/remove-typings-ref build/http-context-driver.d.ts",
+    "test": "node lib/test/http-context-driver.test",
+    "prebuild": "rimraf lib && mkdirp lib",
     "build": "tsc",
+    "postbuild": "bin/remove-typings-ref lib/src/http-context-driver.d.ts",
     "lint": "tslint -c tslint.json src/*.ts"
   },
   "author": "Marius Lundgård <studio@mariuslundgard.com> (http://mariuslundgard.com/)",
@@ -24,6 +27,7 @@
   "devDependencies": {
     "mkdirp": "^0.5.1",
     "rimraf": "^2.5.2",
+    "tape": "^4.5.1",
     "tslint": "^3.8.0",
     "typescript": "^1.8.10",
     "typings": "^0.8.1"
