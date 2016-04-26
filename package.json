@@ -10,18 +10,19 @@
   "scripts": {
     "prepublish": "typings install && npm run build",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "prebuild": "rimraf build && mkdir build",
+    "prebuild": "rimraf build && mkdirp build",
     "postbuild": "bin/remove-typings-ref build/http-context-driver.d.ts",
     "build": "tsc",
     "lint": "tslint -c tslint.json src/*.ts"
   },
   "author": "Marius Lundgård <studio@mariuslundgard.com> (http://mariuslundgard.com/)",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "@cycle/base": "^2.0.1",
     "@reactivex/rxjs": "^5.0.0-beta.6"
   },
   "devDependencies": {
+    "mkdirp": "^0.5.1",
     "rimraf": "^2.5.2",
     "tslint": "^3.8.0",
     "typescript": "^1.8.10",
