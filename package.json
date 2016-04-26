@@ -1,9 +1,12 @@
 {
   "name": "cycle-http-context-driver",
-  "version": "0.0.1-alpha.2",
+  "version": "0.0.1-alpha.3",
   "description": "A HTTP server driver for CycleJS for managing request/response in Node.js.",
   "main": "build/http-context-driver.js",
   "typings": "build/http-context-driver.d.ts",
+  "files": [
+    "build"
+  ],
   "scripts": {
     "prepublish": "typings install && npm run build",
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -23,5 +26,13 @@
     "tslint": "^3.8.0",
     "typescript": "^1.8.10",
     "typings": "^0.8.1"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mariuslundgard/cycle-http-context-driver.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mariuslundgard/cycle-http-context-driver/issues"
+  },
+  "homepage": "https://github.com/mariuslundgard/cycle-http-context-driver#readme"
 }
