@@ -16,16 +16,14 @@ npm install cycle-http-server-driver --save
 
 ```js
 import transport from 'http'
+import bunyan from 'bunyan'
 
 import {
   makeHTTPServerDriver
 } from 'cycle-http-server-driver'
 
-import bunyan from 'bunyan'
-
 const port = 8080
 const logger = bunyan.createLogger({name: 'web'})
-const transport = makeHTTPServerTransport()
 
 const drivers = {
   HTTPServer: makeHTTPServerDriver(port, logger, transport)
