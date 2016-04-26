@@ -1,6 +1,6 @@
 {
   "name": "cycle-http-context-driver",
-  "version": "0.0.1-alpha.3",
+  "version": "0.0.1-alpha.4",
   "description": "A HTTP server driver for CycleJS for managing request/response in Node.js.",
   "main": "lib/src/http-context-driver.js",
   "typings": "lib/src/http-context-driver.d.ts",
