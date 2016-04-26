@@ -1,11 +1,11 @@
 {
   "name": "cycle-http-context-driver",
-  "version": "0.0.1-alpha.1",
-  "description": "",
+  "version": "0.0.1-alpha.2",
+  "description": "A HTTP server driver for CycleJS for managing request/response in Node.js.",
   "main": "build/http-context-driver.js",
   "typings": "build/http-context-driver.d.ts",
   "scripts": {
-    "postinstall": "typings install && npm run build",
+    "prepublish": "typings install && npm run build",
     "test": "echo \"Error: no test specified\" && exit 1",
     "prebuild": "rimraf build && mkdir build",
     "postbuild": "bin/remove-typings-ref build/http-context-driver.d.ts",
